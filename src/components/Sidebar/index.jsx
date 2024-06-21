@@ -16,6 +16,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import CLeaderboard from '../CLeaderboard';
 import './index.css';
 
 const drawerWidth = 320;
@@ -77,7 +78,7 @@ const LessonTypography = styled(Typography)(({ theme, selected }) => ({
 
 const Accordion = styled(MuiAccordion)(({ theme }) => ({
   backgroundColor: '#1A2130',
-  color: 'white', // Set text color to white
+  color: 'white',
 }));
 
 
@@ -119,7 +120,7 @@ export default function PersistentDrawerLeft() {
             Course Name
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <button className='btn btn-primary'>Show LeaderBoard</button>
+          <CLeaderboard/>
         </Toolbar>
       </AppBar>
 

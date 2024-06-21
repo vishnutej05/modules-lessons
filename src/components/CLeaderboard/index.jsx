@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function CLeaderboard() {
   return (
-    <div>CLeaderboard</div>
+    <button className='btn btn-primary'>Show LeaderBoard</button>
   )
 }
