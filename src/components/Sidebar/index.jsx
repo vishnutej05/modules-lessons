@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Accordion from '@mui/material/Accordion';
+import MuiAccordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -23,6 +23,7 @@ const drawerWidth = 320;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
+    // backgroundColor: '#83B4FF', to apply styling to the content part
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -42,6 +43,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
+  backgroundColor: '#1A2130', // background color of App Component
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -65,10 +67,25 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+const LessonTypography = styled(Typography)(({ theme, selected }) => ({
+  cursor: 'pointer',
+  backgroundColor: selected ? '#5A72A0' : 'FDFFE2',
+  '&:hover': {
+    backgroundColor: '#5A72A0',
+  },
+}));
+
+const Accordion = styled(MuiAccordion)(({ theme }) => ({
+  backgroundColor: '#1A2130',
+  color: 'white', // Set text color to white
+}));
+
+
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const [content, setContent] = React.useState('Welcome to the course! Select a lesson to view its content.');
+  const [open, setOpen] = React.useState(false); //related to opening and closing of the drawer
+  const [content, setContent] = React.useState('Welcome to the course! Select a lesson to view its content.'); // to set and update lesson content
+  const [selectedLesson, setSelectedLesson] = React.useState(''); // to add background color to selected lesson
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -78,8 +95,9 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
-  const handleLessonClick = (lessonContent) => {
+  const handleLessonClick = (lessonContent, lesson) => {
     setContent(lessonContent);
+    setSelectedLesson(lesson);
   };
 
   return (
@@ -100,6 +118,8 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap component="div">
             Course Name
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <button className='btn btn-primary'>Show LeaderBoard</button>
         </Toolbar>
       </AppBar>
 
@@ -110,6 +130,7 @@ export default function PersistentDrawerLeft() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            backgroundColor: '#1A2130', // bg color of the drawer
           },
         }}
         variant="persistent"
@@ -117,91 +138,118 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} sx={{ color: 'white' }}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
 
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} // Set icon color to white
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Module 1</Typography>
+            <Typography sx={{ color: 'white' }}>Module 1</Typography>
           </AccordionSummary>
           <Divider />
           <div className='container'>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 1, Lesson 1')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 1, Lesson 1', 'Module1_Lesson1')}
+                selected={selectedLesson === 'Module1_Lesson1'}
+              >
                 Lesson 1
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 1, Lesson 2')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 1, Lesson 2', 'Module1_Lesson2')}
+                selected={selectedLesson === 'Module1_Lesson2'}
+              >
                 Lesson 2
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 1, Lesson 3')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 1, Lesson 3', 'Module1_Lesson3')}
+                selected={selectedLesson === 'Module1_Lesson3'}
+              >
                 Lesson 3
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
           </div>
         </Accordion>
 
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} // Set icon color to white
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography>Module 2</Typography>
+            <Typography sx={{ color: 'white' }}>Module 2</Typography>
           </AccordionSummary>
           <Divider />
           <div className='container'>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 2, Lesson 1')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 2, Lesson 1', 'Module2_Lesson1')}
+                selected={selectedLesson === 'Module2_Lesson1'}
+              >
                 Lesson 1
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 2, Lesson 2')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 2, Lesson 2', 'Module2_Lesson2')}
+                selected={selectedLesson === 'Module2_Lesson2'}
+              >
                 Lesson 2
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 2, Lesson 3')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 2, Lesson 3', 'Module2_Lesson3')}
+                selected={selectedLesson === 'Module2_Lesson3'}
+              >
                 Lesson 3
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
           </div>
         </Accordion>
 
         <Accordion>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />} // Set icon color to white
             aria-controls="panel3a-content"
             id="panel3a-header"
           >
-            <Typography>Module 3</Typography>
+            <Typography sx={{ color: 'white' }}>Module 3</Typography>
           </AccordionSummary>
           <Divider />
           <div className='container'>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 3, Lesson 1')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 3, Lesson 1', 'Module3_Lesson1')}
+                selected={selectedLesson === 'Module3_Lesson1'}
+              >
                 Lesson 1
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 3, Lesson 2')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 3, Lesson 2', 'Module3_Lesson2')}
+                selected={selectedLesson === 'Module3_Lesson2'}
+              >
                 Lesson 2
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
             <AccordionDetails>
-              <Typography onClick={() => handleLessonClick('Content for Module 3, Lesson 3')}>
+              <LessonTypography
+                onClick={() => handleLessonClick('Content for Module 3, Lesson 3', 'Module3_Lesson3')}
+                selected={selectedLesson === 'Module3_Lesson3'}
+              >
                 Lesson 3
-              </Typography>
+              </LessonTypography>
             </AccordionDetails>
           </div>
         </Accordion>
