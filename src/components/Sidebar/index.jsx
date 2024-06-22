@@ -16,7 +16,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import CLeaderboard from '../CLeaderboard';
+import CourseLeaderbard from '../CourseLeaderbard';
 import './index.css';
 
 const drawerWidth = 320;
@@ -120,7 +120,7 @@ export default function PersistentDrawerLeft() {
             Course Name
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <CLeaderboard/>
+          <CourseLeaderbard/>
         </Toolbar>
       </AppBar>
 

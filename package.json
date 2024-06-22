@@ -16,10 +16,14 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
+    "@mui/x-data-grid": "^7.7.1",
     "@rewind-ui/core": "^0.19.11",
     "bootstrap": "^5.3.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-bootstrap": "^2.10.3",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.2.1",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
